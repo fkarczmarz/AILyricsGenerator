@@ -1,11 +1,12 @@
-# Ignorowanie katalogu z tekstami piosenek
+# Ignoruj pliki z danymi
 data/raw_lyrics/
 data/processed_lyrics/
 data/lyrics_dataset.csv
 
-# Ignorowanie plików wirtualnego środowiska
-venv/
+# Ignoruj pliki modeli
+model/gpt2-lyrics-finetuned/
+model/cached_lm_GPT2Tokenizer_128_lyrics_cache/
 
-# Ignorowanie plików systemowych
-.DS_Store
-Thumbs.db
+# Ignoruj pliki wirtualnego środowiska
+venv/
+.env/
