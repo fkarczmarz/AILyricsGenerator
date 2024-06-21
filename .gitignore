@@ -1,6 +1,6 @@
 # Ignoruj pliki z danymi
 data/raw_lyrics/
-data/processed_lyrics
+data/processed_lyrics/
 data/lyrics_dataset.csv
 
 # Ignoruj pliki modeli
