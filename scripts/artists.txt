@@ -1,0 +1,600 @@
+Rihanna
+Drake
+Coldplay
+Eminem
+The Weeknd
+Maroon 5
+Bruno Mars
+Taylor Swift
+Kanye West
+Ed Sheeran
+Adele
+Beyoncé
+Justin Bieber
+Kendrick Lamar
+Katy Perry
+Lady Gaga
+Calvin Harris
+Nicki Minaj
+Red Hot Chili Peppers
+Imagine Dragons
+Lana Del Rey
+Ariana Grande
+U2
+David Guetta
+Queen
+Chris Brown
+Lil Wayne
+Arctic Monkeys
+Post Malone
+Radiohead
+Justin Timberlake
+Miley Cyrus
+Billie Eilish
+Usher
+The Killers
+Pitbull
+Fleetwood Mac
+J. Cole
+Black Eyed Peas
+Sam Smith
+Green Day
+Elton John
+Sia
+Travis Scott
+Frank Ocean
+Wiz Khalifa
+Britney Spears
+Kings of Leon
+The Rolling Stones
+Ellie Goulding
+Future
+Shakira
+A$AP Rocky
+Jason Derulo
+OneRepublic
+Metallica
+Flo Rida
+Muse
+Gorillaz
+Foo Fighters
+Childish Gambino
+Alicia Keys
+Twenty One Pilots
+Paramore
+Mumford & Sons
+Lorde
+Fall Out Boy
+Shawn Mendes
+Kid Cudi
+Harry Styles
+SZA
+Tyler, The Creator
+Dua Lipa
+Tame Impala
+Khalid
+Snoop Dogg
+Big Sean
+AC/DC
+Selena Gomez
+Jay-Z
+Hozier
+The Chainsmokers
+Demi Lovato
+Guns N' Roses
+The Cure
+MGMT
+50 Cent
+Panic! At the Disco
+Mariah Carey
+John Mayer
+Kesha
+The Neighbourhood
+blink-182
+John Legend
+The Black Keys
+Skrillex
+Major Lazer
+Michael Bublé
+The Strokes
+The Lumineers
+Doja Cat
+Dr. Dre
+Halsey
+DJ Khaled
+Bon Iver
+Pearl Jam
+Kelly Clarkson
+Tyga
+Avril Lavigne
+Macklemore & Ryan Lewis
+Madonna
+Foster the People
+Pharrell Williams
+Jennifer Lopez
+Stevie Wonder
+Weezer
+Nickelback
+Lil Uzi Vert
+OutKast
+Miguel
+The xx
+T.I.
+Enrique Iglesias
+21 Savage
+Bastille
+Billy Joel
+Bon Jovi
+Cardi B
+Jack Johnson
+Ne-Yo
+System of a Down
+Olivia Rodrigo
+Train
+Bob Dylan
+Aerosmith
+Migos
+Tiësto
+Jason Mraz
+Cage the Elephant
+Trey Songz
+Florence + The Machine
+Young Thug
+G-Eazy
+Marshmello
+Kygo
+Arcade Fire
+alt-J
+Bad Bunny
+Christina Aguilera
+Akon
+Ty Dolla $ign
+Disclosure
+Chance the Rapper
+2 Chainz
+5 Seconds of Summer
+The Script
+Zedd
+Meghan Trainor
+The Smashing Pumpkins
+The 1975
+Jessie J
+Labrinth
+Eagles
+B.o.B
+Bruce Springsteen
+Gucci Mane
+Nelly
+J Balvin
+Slipknot
+Martin Garrix
+Vance Joy
+Jeremih
+The Kooks
+Metro Boomin
+Sean Paul
+One Direction
+The Beach Boys
+DJ Snake
+Two Door Cinema Club
+Mac DeMarco
+Charlie Puth
+Camila Cabello
+Clean Bandit
+Vampire Weekend
+The Fray
+Of Monsters and Men
+Journey
+Daddy Yankee
+T-Pain
+The Offspring
+Meek Mill
+Kali Uchis
+Pixies
+Depeche Mode
+Logic
+M83
+Nas
+Diplo
+Mark Ronson
+Tove Lo
+ZAYN
+Ludacris
+P!NK
+Tory Lanez
+Rae Sremmurd
+Beck
+Gwen Stefani
+Luke Bryan
+Bryson Tiller
+Little Mix
+Eric Clapton
+Avicii
+Death Cab for Cutie
+Rick Ross
+Phoenix
+Flume
+Kodak Black
+James Arthur
+Steve Lacy
+French Montana
+ScHoolboy Q
+Joji
+Cigarettes After Sex
+Nelly Furtado
+Korn
+Snow Patrol
+Linkin Park
+The Who
+Santana
+Jhené Aiko
+Troye Sivan
+Lil Yachty
+Lil Nas X
+Swedish House Mafia
+PARTYNEXTDOOR
+Fun.
+Timbaland
+Lewis Capaldi
+BTS
+Bring Me The Horizon
+The Goo Goo Dolls
+Sufjan Stevens
+Alessia Cara
+A Boogie Wit da Hoodie
+Melanie Martinez
+Daniel Caesar
+Playboi Carti
+Lady A
+Earth, Wind & Fire
+Charli XCX
+Evanescence
+Beach House
+Jason Aldean
+Blur
+Fergie
+Lynyrd Skynyrd
+YG
+George Ezra
+Kiss
+Kehlani
+will.i.am
+Passenger
+Carly Rae Jepsen
+Queens of the Stone Age
+Norah Jones
+Blackbear
+Fetty Wap
+Moby
+Lil Baby
+Deadmau5
+Bryan Adams
+Trippie Redd
+Van Morrison
+Carrie Underwood
+Three Days Grace
+Glass Animals
+My Chemical Romance
+Modest Mouse
+Lupe Fiasco
+Russ
+Iggy Azalea
+M.I.A.
+Lizzo
+Paul McCartney
+Gotye
+Deftones
+Lily Allen
+Franz Ferdinand
+The National
+Mary J. Blige
+Ice Cube
+ABBA
+Sublime
+Mike Posner
+Wale
+Brent Faiyaz
+Empire of the Sun
+Daft Punk
+Zara Larsson
+Disturbed
+Rod Stewart
+Yeah Yeah Yeahs
+Tim McGraw
+Rascal Flatts
+Incubus
+Birdy
+The All-American Rejects
+Ciara
+Daryl Hall & John Oates
+Blondie
+The Game
+Rex Orange County
+Jonas Brothers
+Backstreet Boys
+Zac Brown Band
+Mitski
+James Blake
+Bebe Rexha
+Milky Chance
+Avenged Sevenfold
+Passion Pit
+Maluma
+Thirty Seconds to Mars
+James Bay
+Limp Bizkit
+Taio Cruz
+Nine Inch Nails
+Florida Georgia Line
+Clairo
+Neil Young
+Keith Urban
+Ozuna
+The Shins
+Owl City
+Fifth Harmony
+Christina Perri
+Blake Shelton
+Robin Thicke
+Fleet Foxes
+Massive Attack
+A Tribe Called Quest
+Quavo
+R. Kelly
+A$AP Ferg
+All Time Low
+Juicy J
+Van Halen
+MARINA
+Portugal. The Man
+Iron Maiden
+Phil Collins
+Papa Roach
+Gunna
+James Blunt
+Band of Horses
+Ozzy Osbourne
+Hans Zimmer
+Niall Horan
+Alice In Chains
+Lykke Li
+Tears For Fears
+Joey Bada$$
+Kid Ink
+3 Doors Down
+New Order
+Conan Gray
+Celine Dion
+Sum 41
+Foals
+Lauv
+Anderson .Paak
+Sabrina Carpenter
+Machine Gun Kelly
+Sting
+Iron & Wine
+Grouplove
+Marilyn Manson
+girl in red
+No Doubt
+Sean Kingston
+Def Leppard
+Keane
+NF
+Duran Duran
+Tom Odell
+Jorja Smith
+Robbie Williams
+TV Girl
+Missy Elliott
+Offset
+Rise Against
+Lenny Kravitz
+Rudimental
+Counting Crows
+Rita Ora
+Steve Aoki
+Pusha T
+Young the Giant
+Megan Thee Stallion
+Wu-Tang Clan
+ODESZA
+Dave Matthews Band
+Erykah Badu
+MØ
+Jimmy Eat World
+Rammstein
+Busta Rhymes
+Tate McRae
+Dolly Parton
+TLC
+Grimes
+Armin van Buuren
+Edward Sharpe & The Magnetic Zeros
+Dominic Fike
+Ben Howard
+Toto
+Kenny Chesney
+BLACKPINK
+The Temper Trap
+Chemical Brothers
+Bazzi
+Kylie Minogue
+Kasabian
+Mac Miller
+Brad Paisley
+Rage Against The Machine
+LMFAO
+Jack Harlow
+AWOLNATION
+Sara Bareilles
+Alanis Morissette
+Don Omar
+Summer Walker
+Macklemore
+Alan Walker
+Her
+Nicky Jam
+Karol G
+Glee Cast
+Olly Murs
+Dababy
+Aminé
+Anne-Marie
+Neon Trees
+Becky G
+Colbie Caillat
+Bonobo
+Noah Kahan
+6LACK
+ROSALIA
+Shaggy
+Paul Simon
+Sigur Rós
+Galantis
+Alabama Shakes
+Plain White T's
+Björk
+Nick Jonas
+The Prodigy
+Walk the Moon
+Jungle
+Chris Stapleton
+Chief Keef
+Hailee Steinfeld
+ZZ Top
+Breaking Benjamin
+Jonas Blue
+HAIM
+Bloc Party
+Mötley Crüe
+Jamiroquai
+The Wombats
+Robin Schulz
+Gym Class Heroes
+The Verve
+Interpol
+Lord Huron
+The Pussycat Dolls
+$UICIDEBOY$
+P/NK
+Ms. Lauryn Hill
+Cold War Kids
+Alesso
+Justice
+Angus & Julia Stone
+Waka Flocka Flame
+A Day to Remember
+Julia Michaels
+Afrojack
+Tracy Chapman
+Jess Glynne
+Five Finger Death Punch
+Stromae
+Cyndi Lauper
+Feist
+Brockhampton
+Al Green
+Shinedown
+Leona Lewis
+Fatboy Slim
+Miranda Lambert
+Thundercat
+PinkPantheress
+Paolo Nutini
+Scorpions
+Lionel Richie
+José González
+X Ambassadors
+Crystal Castles
+James Taylor
+Romeo Santos
+Kodaline
+Jeezy
+Regina Spektor
+Tool
+Mika
+Phoebe Bridgers
+Yo Gotti
+Kaytranada
+Sheryl Crow
+Plan B
+Pentatonix
+Tinie Tempah
+Ski Mask The Slump God
+Foreigner
+Matchbox Twenty
+Vince Staples
+Dave
+CHVRCHES
+Stone Temple Pilots
+Luke Combs
+Portishead
+Måneskin
+The Head and the Heart
+Simple Plan
+The Temptations
+Phantogram
+Pierce the Veil
+Dido
+3OH!3
+The Flaming Lips
+Leon Bridges
+London Grammar
+Billy Idol
+Luis Fonsi
+Good Charlotte
+Seether
+Pantera
+Tinashe
+Aloe Blacc
+Shania Twain
+Wallows
+The Kid LAROI.
+Dean Lewis
+Ludovico Einaudi
+Placebo
+Stormzy
+Natasha Bedingfield
+The Naked and Famous
+Eric Church
+The Wanted
+Lil Durk
+Thomas Rhett
+Deep Purple
+Willow
+Emeli Sandé
+Air
+Prince Royce
+Lost Frequencies
+Cypress Hill
+Baby Keem
+Fabolous
+La Roux
+6ix9ine
+INXS
+Morgan Wallen
+Zach Bryan
+Grizzly Bear
+Steve Miller Band
+Common
+Lil Tecca
+Men I Trust
+Boyz II Men
+Wilco
+Kaiser Chiefs
+Mother Mother
+Spoon
+Bombay Bicycle Club
+Janelle Monáe
+Toby Keith
+Don Toliver
+Khruangbin
+Metric
+Local Natives
+Earl Sweatshirt
+Bullet for My Valentine
+Kevin Gates
+Gavin DeGraw
+Megadeth
+Miike Snow

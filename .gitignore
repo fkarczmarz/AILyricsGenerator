@@ -1,0 +1,11 @@
+# Ignorowanie katalogu z tekstami piosenek
+data/raw_lyrics/
+data/processed_lyrics/
+data/lyrics_dataset.csv
+
+# Ignorowanie plików wirtualnego środowiska
+venv/
+
+# Ignorowanie plików systemowych
+.DS_Store
+Thumbs.db
