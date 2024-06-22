@@ -11,7 +11,7 @@ def load_dataset(file_path, tokenizer, block_size=128):
     )
     return dataset
 
-def train_model(artist, data_path, model_name='gpt2', output_dir_base="../model"):
+def train_model(artist, data_path, model_name='gpt2', output_dir_base="/content/drive/MyDrive/models"):
     # Load pre-trained model and tokenizer
     tokenizer = GPT2Tokenizer.from_pretrained(model_name)
     model = GPT2LMHeadModel.from_pretrained(model_name)
@@ -26,10 +26,18 @@ def train_model(artist, data_path, model_name='gpt2', output_dir_base="../model"
     training_args = TrainingArguments(
         output_dir=output_dir,
         overwrite_output_dir=True,
-        num_train_epochs=3,
-        per_device_train_batch_size=4,
-        save_steps=10_000,
-        save_total_limit=2,
+        num_train_epochs=20,  # Zwiększenie liczby epok dla lepszej jakości
+        per_device_train_batch_size=150,  # Zwiększenie batch size
+        save_steps=75_000,
+        save_total_limit=3,
+        gradient_accumulation_steps=4,  # Umożliwia symulowanie większego batch size
+        learning_rate=5e-5,  # Optymalny learning rate
+        fp16=True,  # Mixed precision training
+        logging_steps=500,  # Dodanie logowania co określoną liczbę kroków
+        evaluation_strategy="steps",  # Umożliwia ewaluację co określoną liczbę kroków
+        eval_steps=1000,  # Ewaluacja co określoną liczbę kroków
+        warmup_steps=500,  # Dodanie warmup dla stabilniejszego treningu
+        weight_decay=0.01,  # Dodanie weight decay dla regularizacji
     )
 
     # Create data collator
@@ -55,7 +63,7 @@ def train_model(artist, data_path, model_name='gpt2', output_dir_base="../model"
     print(f"Model trained and saved for artist: {artist}")
 
 def main():
-    input_dir = os.path.join("..", "data", "processed_lyrics")
+    input_dir = os.path.join("/content/AILyricsGenerator/data", "processed_lyrics")
     model_name = "gpt2"
 
     for artist_file in os.listdir(input_dir):

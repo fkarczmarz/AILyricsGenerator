@@ -3,36 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Text Generator</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>Music Lyrics Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>AI Text Generator</h1>
-        <form id="generate-form">
-            <label for="seed_text">Seed Text:</label>
-            <input type="text" id="seed_text" name="seed_text" required>
-            <label for="next_words">Next Words:</label>
-            <input type="number" id="next_words" name="next_words" required>
-            <button type="submit">Generate Text</button>
+        <h1>Music Lyrics Generator</h1>
+        <form action="/generate" method="POST">
+            <label for="prompt">Prompt:</label>
+            <input type="text" id="prompt" name="prompt" required>
+            <label for="artist">Artist:</label>
+            <input type="text" id="artist" name="artist" required>
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" name="genre" required>
+            <button type="submit">Generate</button>
         </form>
-        <div id="result"></div>
+        {% if generated_text %}
+        <div class="result">
+            <h2>Generated Lyrics:</h2>
+            <p>{{ generated_text }}</p>
+        </div>
+        {% endif %}
     </div>
-    <script>
-        document.getElementById('generate-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const seed_text = document.getElementById('seed_text').value;
-            const next_words = document.getElementById('next_words').value;
-            const response = await fetch('/generate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ seed_text, next_words })
-            });
-            const result = await response.json();
-            document.getElementById('result').innerText = result.generated_text;
-        });
-    </script>
 </body>
 </html>
