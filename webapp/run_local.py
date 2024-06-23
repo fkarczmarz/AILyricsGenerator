@@ -1,9 +1,9 @@
-from flask import Flask, request, jsonify
-import os
+from flask import Flask, request, jsonify, render_template
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 import torch
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
 
 model_cache = {}
 
@@ -18,54 +18,57 @@ def load_model(artist):
     return model_cache[artist]
 
 def load_tokenizer(artist):
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    tokenizer_path = os.path.join(base_path, "../local_models", f"gpt2-lyrics-{artist}")
-    return GPT2Tokenizer.from_pretrained(tokenizer_path)
+    model_path = os.path.join("../local_models", f"gpt2-lyrics-{artist}")
+    return GPT2Tokenizer.from_pretrained(model_path)
+
+@app.route("/")
+def index():
+    return render_template('index.html')
 
 @app.route("/generate", methods=["POST"])
 def generate():
-    data = request.json
+    data = request.get_json()
     artist = data.get("artist", "")
     genre = data.get("genre", "")
-
+    
+    # Debugging logs
+    print(f"Received request with Artist: {artist}, Genre: {genre}")
+    
     if not artist:
         return jsonify({"error": "Artist is required"})
-
+    
     # Load model and tokenizer
     try:
+        print("Loading model and tokenizer...")
         model = load_model(artist)
         tokenizer = load_tokenizer(artist)
+        print("Model and tokenizer loaded successfully")
     except Exception as e:
+        print(f"Error loading model or tokenizer: {e}")
         return jsonify({"error": str(e)})
-
-    # Default prompt for generation
-    prompt = "This is a song about "
-
-    print(f"Using prompt: {prompt}")
-
+    
     # Generate lyrics
     try:
+        print("Generating lyrics...")
+        prompt = f"Generate a song in the style of {artist} and genre {genre}."
         inputs = tokenizer.encode(prompt, return_tensors="pt")
-        if inputs.size(1) == 0:
-            return jsonify({"error": "Empty input tensor. The prompt may not be properly encoded."})
-        attention_mask = torch.ones(inputs.shape, dtype=torch.long)
         outputs = model.generate(
             inputs,
-            attention_mask=attention_mask,
-            max_length=500,
-            num_return_sequences=1,
+            max_length=200,  # Increase this value to get longer texts
+            num_return_sequences=2,
             no_repeat_ngram_size=2,
             early_stopping=True,
-            repetition_penalty=2.0,
-            temperature=0.7,
-            top_p=0.9,
+            repetition_penalty=3.0,
+            temperature=2.1,
+            top_p=0.5,
             do_sample=True
         )
         generated = tokenizer.decode(outputs[0], skip_special_tokens=True)
-        print(f"Generated Text: {generated}")  # Debugging output
+        print(f"Generated text: {generated}")
     except Exception as e:
+        print(f"Error generating lyrics: {e}")
         return jsonify({"error": str(e)})
-
+    
     return jsonify({"lyrics": generated})
 
 if __name__ == "__main__":

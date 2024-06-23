@@ -1,7 +1,8 @@
 # Ignoruj pliki z danymi
 data/raw_lyrics/
-data/processed_lyrics/
 data/lyrics_dataset.csv
+local_models
+Lana/Lana/lanaraw
 
 # Ignoruj pliki modeli
 model/gpt2-lyrics-finetuned/
