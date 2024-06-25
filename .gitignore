@@ -3,6 +3,7 @@ data/raw_lyrics/
 data/lyrics_dataset.csv
 local_models
 Lana/Lana/lanaraw
+.env
 
 # Ignoruj pliki modeli
 model/gpt2-lyrics-finetuned/

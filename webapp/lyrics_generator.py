@@ -1,13 +1,16 @@
+import os
 import openai
 import random
 import pandas as pd
 import numpy as np
 import tensorflow as tf
+from dotenv import load_dotenv
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import json
 
-openai.api_key = 'key'
+load_dotenv()
+openai.api_key = os.getenv('OPENAI')
 
 themes_file_path = '../Lana/Lana/processedlanalyrics/Lana_Del_Rey_individual_themes.csv'
 themes_df = pd.read_csv(themes_file_path)
@@ -84,7 +87,7 @@ def generate_lyrics_from_model(seed_text, next_words=50, temperature=1.0, top_p=
 
     return ' '.join(lyrics_with_punctuation)
 
-def generate_song(prompt, max_length=700):
+def generate_song(prompt, max_length=400):
     response = openai.Completion.create(
         engine="gpt-3.5-turbo-instruct",
         prompt=prompt,

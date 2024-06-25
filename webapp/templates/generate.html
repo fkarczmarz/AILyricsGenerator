@@ -6,45 +6,14 @@
     <title>AI Lyrics Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#generateButton').click(function() {
-                var prompt = $('#prompt').val();
-                var data = {
-                    prompt: prompt
-                };
-                $.ajax({
-                    url: '/generate',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(data),
-                    success: function(response) {
-                        $('#generatedLyrics').text("Generated Lyrics:\n" + response.generated_lyrics);
-                        $('#melodySection').show();
-                    }
-                });
-                return false;
-            });
-
-            $('#generateMelodyButton').click(function() {
-                var lyrics = $('#generatedLyrics').text().replace("Generated Lyrics:\n", "");
-                var data = {
-                    lyrics: lyrics
-                };
-                $.ajax({
-                    url: '/generate_melody',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(data),
-                    success: function(response) {
-                        $('#melodyLink').attr('href', response.melody_url);
-                        $('#melodyLink').show();
-                    }
-                });
-                return false;
-            });
-        });
-    </script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <!-- Add additional Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
     <header>
@@ -56,15 +25,32 @@
         </nav>
     </header>
     <main>
-        <form id="lyricsForm">
-            <label for="prompt">Prompt:</label>
-            <input type="text" id="prompt" name="prompt"><br><br>
-            <button id="generateButton">Generate Lyrics</button>
-        </form>
-        <div id="generatedLyrics"></div>
-        <div id="melodySection" style="display:none;">
-            <button id="generateMelodyButton">Generate Melody</button>
-            <a id="melodyLink" href="#" style="display:none;" download="melody.mid">Download Melody</a>
+        <div id="loginSection">
+            <h2>Login</h2>
+            <div id="firebaseui-auth-container"></div>
+            <div id="loader">Loading...</div>
+        </div>
+        <div id="generateSection" style="display:none;">
+            <p id="userDetails"></p>
+            <form id="lyricsForm">
+                <label for="prompt">Prompt:</label>
+                <input type="text" id="prompt" name="prompt"><br><br>
+                <button id="generateButton">Generate Lyrics</button>
+            </form>
+            <div id="generatedLyrics"></div>
+            <div id="melodySection" style="display:none;">
+                <button id="generateMelodyButton">Generate Melody</button>
+                <a id="melodyLink" href="#" style="display:none;" download="melody.mid">Download Melody</a>
+                <br>
+                <button id="downloadOriginalPdfButton">Download Original Lyrics PDF</button>
+                <button id="translateButton">Translate Lyrics</button>
+                <input type="text" id="targetLang" name="targetLang" placeholder="Enter target language code (e.g., 'es' for Spanish)">
+                <div id="translatedSection" style="display:none;">
+                    <div id="translatedLyrics"></div>
+                    <button id="downloadTranslatedPdfButton" style="display:none;">Download Translated Lyrics PDF</button>
+                    <button id="downloadBothPdfButton" style="display:none;">Download Both Versions PDF</button>
+                </div>
+            </div>
         </div>
     </main>
     <footer>

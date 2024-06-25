@@ -11,3 +11,4 @@ note_seq
 mingus
 lyricsgenius
 reportlab
+deepl
