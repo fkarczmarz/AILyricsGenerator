@@ -1,72 +1,34 @@
-from flask import Flask, request, jsonify
-import os
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
-import torch
+from flask import render_template, request, jsonify, send_from_directory
+from webapp import app
+from webapp.lyrics_generator import generate_final_lyrics
+from webapp.melody_generator import generate_melody, save_melody_to_midi
 
-app = Flask(__name__)
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-model_cache = {}
+@app.route('/generate_page')
+def generate_page():
+    return render_template('generate.html')
 
-def load_model(artist):
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(base_path, "../local_models", f"gpt2-lyrics-{artist}")
-    if artist not in model_cache:
-        if not os.path.exists(model_path):
-            raise ValueError(f"Model for artist {artist} does not exist at path {model_path}")
-        model_cache[artist] = GPT2LMHeadModel.from_pretrained(model_path)
-        print(f"Loaded model for artist {artist} from {model_path}")
-    return model_cache[artist]
-
-def load_tokenizer(artist):
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    tokenizer_path = os.path.join(base_path, "../local_models", f"gpt2-lyrics-{artist}")
-    return GPT2Tokenizer.from_pretrained(tokenizer_path)
-
-@app.route("/generate", methods=["POST"])
+@app.route('/generate', methods=['POST'])
 def generate():
     data = request.json
-    artist = data.get("artist", "")
-    genre = data.get("genre", "")
+    result = generate_final_lyrics(data)
+    return jsonify(result)
 
-    if not artist:
-        return jsonify({"error": "Artist is required"})
+@app.route('/generate_melody', methods=['POST'])
+def generate_melody_route():
+    data = request.json
+    lyrics = data.get('lyrics', '')
+    if not lyrics:
+        return jsonify({'error': 'No lyrics provided'}), 400
 
-    # Load model and tokenizer
-    try:
-        model = load_model(artist)
-        tokenizer = load_tokenizer(artist)
-    except Exception as e:
-        return jsonify({"error": str(e)})
+    melody = generate_melody(lyrics)
+    melody_file = 'static/melody.mid'
+    save_melody_to_midi(melody, melody_file)
+    return jsonify({'melody_url': '/' + melody_file})
 
-    # Default prompt for generation
-    prompt = "This is a song about "
-
-    print(f"Using prompt: {prompt}")
-
-    # Generate lyrics
-    try:
-        inputs = tokenizer.encode(prompt, return_tensors="pt")
-        if inputs.size(1) == 0:
-            return jsonify({"error": "Empty input tensor. The prompt may not be properly encoded."})
-        attention_mask = torch.ones(inputs.shape, dtype=torch.long)
-        outputs = model.generate(
-            inputs,
-            attention_mask=attention_mask,
-            max_length=500,
-            num_return_sequences=1,
-            no_repeat_ngram_size=2,
-            early_stopping=True,
-            repetition_penalty=2.0,
-            temperature=0.7,
-            top_p=0.9,
-            do_sample=True
-        )
-        generated = tokenizer.decode(outputs[0], skip_special_tokens=True)
-        print(f"Generated Text: {generated}")  # Debugging output
-    except Exception as e:
-        return jsonify({"error": str(e)})
-
-    return jsonify({"lyrics": generated})
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return send_from_directory('static', filename)

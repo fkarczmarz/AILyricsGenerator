@@ -2,40 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Music Lyrics Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lyrics Generator Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Music Lyrics Generator</h1>
-    <form id="lyricsForm">
-        <label for="artist">Artist:</label>
-        <input type="text" id="artist" name="artist"><br><br>
-        <label for="genre">Genre:</label>
-        <input type="text" id="genre" name="genre"><br><br>
-        <button type="button" onclick="generateLyrics()">Generate</button>
-    </form>
-    <h2>Generated Lyrics:</h2>
-    <p id="result"></p>
-    
-    <script>
-        async function generateLyrics() {
-            const artist = document.getElementById('artist').value;
-            const genre = document.getElementById('genre').value;
-            
-            const response = await fetch('/generate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ artist, genre })
-            });
-            
-            const data = await response.json();
-            if (data.error) {
-                document.getElementById('result').innerText = data.error;
-            } else {
-                document.getElementById('result').innerText = data.lyrics;
-            }
-        }
-    </script>
+    <header>
+        <h1>AI Lyrics Generator</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('generate_page') }}">Generate Lyrics and Melody</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Welcome to the AI Lyrics Generator</h2>
+            <p>Use this tool to generate lyrics and melodies with the power of AI. Click on the menu above to start generating your own lyrics and melodies.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 AI Lyrics Generator</p>
+    </footer>
 </body>
 </html>

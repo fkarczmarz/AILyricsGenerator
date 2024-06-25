@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lyrics Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#generateButton').click(function() {
+                var prompt = $('#prompt').val();
+                var data = {
+                    prompt: prompt
+                };
+                $.ajax({
+                    url: '/generate',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        $('#generatedLyrics').text("Generated Lyrics:\n" + response.generated_lyrics);
+                        $('#melodySection').show();
+                    }
+                });
+                return false;
+            });
+
+            $('#generateMelodyButton').click(function() {
+                var lyrics = $('#generatedLyrics').text().replace("Generated Lyrics:\n", "");
+                var data = {
+                    lyrics: lyrics
+                };
+                $.ajax({
+                    url: '/generate_melody',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        $('#melodyLink').attr('href', response.melody_url);
+                        $('#melodyLink').show();
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>AI Lyrics Generator</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form id="lyricsForm">
+            <label for="prompt">Prompt:</label>
+            <input type="text" id="prompt" name="prompt"><br><br>
+            <button id="generateButton">Generate Lyrics</button>
+        </form>
+        <div id="generatedLyrics"></div>
+        <div id="melodySection" style="display:none;">
+            <button id="generateMelodyButton">Generate Melody</button>
+            <a id="melodyLink" href="#" style="display:none;" download="melody.mid">Download Melody</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 AI Lyrics Generator</p>
+    </footer>
+</body>
+</html>
