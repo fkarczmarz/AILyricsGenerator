@@ -55,6 +55,11 @@
             </div>
             <div id="savedLyricsSection">
                 <h3>Saved Lyrics</h3>
+                <select id="sortOption" onchange="sortLyrics()">
+                    <option value="favorite">Sort by Favorite</option>
+                    <option value="alphabetical">Sort Alphabetically</option>
+                    <option value="date">Sort by Date</option>
+                </select>
                 <ul id="savedLyricsList"></ul>
             </div>
         </div>

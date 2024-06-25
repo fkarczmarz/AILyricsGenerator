@@ -11,8 +11,6 @@
     <!-- Add additional Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
@@ -20,18 +18,17 @@
         <h1>Lyrics Details</h1>
         <nav>
             <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('generate_page') }}">Generate</a></li>
+                <li><a href="{{ url_for('generate_page') }}">Back to Generate</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <div id="lyricsDetailsSection">
-            <h3 id="viewLyricsTitle"></h3>
-            <p id="viewLyricsContent"></p>
-            <p id="viewLyricsRating"></p>
-            <p id="viewLyricsFavorite"></p>
-            <p id="viewLyricsCreatedAt"></p>
+            <h3 id="lyricsTitle"></h3>
+            <p id="lyricsContent"></p>
+            <p id="lyricsRating"></p>
+            <p id="lyricsFavorite"></p>
+            <p id="lyricsCreatedAt"></p>
             <button id="generateMelodyButton">Generate Melody</button>
             <button id="translateButton">Translate Lyrics</button>
             <input type="text" id="targetLangView" name="targetLang" placeholder="Enter target language code (e.g., 'es' for Spanish)">
@@ -41,72 +38,132 @@
                 <button id="downloadBothPdfButtonView" style="display:none;">Download Both Versions PDF</button>
             </div>
             <br>
-            <button id="saveLyricsButton">Save Lyrics</button>
-            <button id="rateLyricsButton">Rate Lyrics</button>
-            <button id="favoriteLyricsButton">Favorite Lyrics</button>
-            <button id="deleteLyricsButton">Delete Lyrics</button>
+            <button onclick="saveLyrics()">Save Lyrics</button>
+            <button onclick="markAsFavorite()">Favorite</button>
+            <button onclick="rateLyrics()">Rate</button>
+            <button onclick="deleteLyrics()">Delete</button>
         </div>
     </main>
     <footer>
         <p>&copy; 2024 AI Lyrics Generator</p>
     </footer>
     <script>
+        var lyricsId = "{{ lyrics_id }}";
         $(document).ready(function() {
-            var lyricsId = "{{ lyrics_id }}";
-            var db = firebase.firestore();
-
-            function loadLyricsDetails() {
-                db.collection('lyrics').doc(lyricsId).get().then((doc) => {
-                    if (doc.exists) {
-                        var lyricsData = doc.data();
-                        $('#viewLyricsTitle').text(lyricsData.title);
-                        $('#viewLyricsContent').text(lyricsData.lyrics);
-                        $('#viewLyricsRating').text(`Rating: ${lyricsData.rating}`);
-                        $('#viewLyricsFavorite').text(`Favorite: ${lyricsData.favorite}`);
-                        $('#viewLyricsCreatedAt').text(`Created At: ${new Date(lyricsData.createdAt.toDate()).toISOString()}`);
-                    } else {
-                        alert('No such lyrics found!');
+            var user = firebase.auth().currentUser;
+            if (user) {
+                loadLyricsDetails(lyricsId);
+            } else {
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        loadLyricsDetails(lyricsId);
                     }
-                }).catch((error) => {
-                    console.error('Error getting lyrics: ', error);
                 });
             }
-
-            loadLyricsDetails();
-
-            $('#rateLyricsButton').click(function() {
-                var rating = prompt("Enter a rating (1-5):", "5");
-                if (rating !== null) {
-                    db.collection('lyrics').doc(lyricsId).update({
-                        rating: parseInt(rating)
-                    }).then(() => {
-                        alert('Lyrics rated successfully!');
-                        loadLyricsDetails();
-                    }).catch((error) => {
-                        console.error('Error rating lyrics: ', error);
-                    });
-                }
-            });
-
-            $('#favoriteLyricsButton').click(function() {
-                db.collection('lyrics').doc(lyricsId).update({
-                    favorite: true
-                }).then(() => {
-                    alert('Lyrics marked as favorite!');
-                    loadLyricsDetails();
-                }).catch((error) => {
-                    console.error('Error marking lyrics as favorite: ', error);
-                });
-            });
-
-            $('#deleteLyricsButton').click(function() {
-                db.collection('lyrics').doc(lyricsId).delete().then(() => {
-                    alert('Lyrics deleted successfully!');
-                    window.location.href = "{{ url_for('generate_page') }}";
-                }).catch((error) => {
-                    console.error('Error deleting lyrics: ', error);
-                });
-            });
         });
+
+        function loadLyricsDetails(lyricsId) {
+            db.collection('lyrics').doc(lyricsId).get().then((doc) => {
+                if (doc.exists) {
+                    var lyricsData = doc.data();
+                    $('#lyricsTitle').text(lyricsData.title);
+                    $('#lyricsContent').text(lyricsData.lyrics);
+                    $('#lyricsRating').text(`Rating: ${lyricsData.rating}`);
+                    $('#lyricsFavorite').text(`Favorite: ${lyricsData.favorite}`);
+                    $('#lyricsCreatedAt').text(`Created At: ${new Date(lyricsData.createdAt.toDate()).toISOString()}`);
+                } else {
+                    alert('No such lyrics found!');
+                }
+            }).catch((error) => {
+                console.error('Error getting lyrics: ', error);
+            });
+        }
+
+        function saveLyrics() {
+            var user = firebase.auth().currentUser;
+            if (!user) {
+                alert('You need to be logged in to save lyrics.');
+                return;
+            }
+
+            var lyrics = $('#lyricsContent').text();
+            var title = $('#lyricsTitle').text();
+
+            if (title !== null) {
+                db.collection('lyrics').doc(lyricsId).update({
+                    userId: user.uid,
+                    title: title,
+                    lyrics: lyrics,
+                    translations: {},
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    favorite: false,
+                    rating: 0
+                }).then(() => {
+                    alert('Lyrics saved successfully!');
+                }).catch((error) => {
+                    console.error('Error saving lyrics: ', error);
+                });
+            }
+        }
+
+        function markAsFavorite() {
+            var user = firebase.auth().currentUser;
+            if (!user) {
+                alert('You need to be logged in to mark as favorite.');
+                return;
+            }
+
+            db.collection('lyrics').doc(lyricsId).get().then((doc) => {
+                var lyricsData = doc.data();
+                db.collection('lyrics').doc(lyricsId).update({
+                    favorite: !lyricsData.favorite
+                }).then(() => {
+                    alert(`Lyrics ${!lyricsData.favorite ? 'marked as favorite' : 'unmarked as favorite'}!`);
+                    loadLyricsDetails(lyricsId);
+                }).catch((error) => {
+                    console.error('Error updating favorite status: ', error);
+                });
+            });
+        }
+
+        function rateLyrics() {
+            var user = firebase.auth().currentUser;
+            if (!user) {
+                alert('You need to be logged in to rate lyrics.');
+                return;
+            }
+
+            var rating = prompt("Rate this song (1-5):", "5");
+            rating = parseInt(rating);
+            if (isNaN(rating) || rating < 1 || rating > 5) {
+                alert('Invalid rating');
+                return;
+            }
+
+            db.collection('lyrics').doc(lyricsId).update({
+                rating: rating
+            }).then(() => {
+                alert('Lyrics rated successfully!');
+                loadLyricsDetails(lyricsId);
+            }).catch((error) => {
+                console.error('Error rating lyrics: ', error);
+            });
+        }
+
+        function deleteLyrics() {
+            var user = firebase.auth().currentUser;
+            if (!user) {
+                alert('You need to be logged in to delete lyrics.');
+                return;
+            }
+
+            db.collection('lyrics').doc(lyricsId).delete().then(() => {
+                alert('Lyrics deleted successfully!');
+                window.location.href = '/generate_page';
+            }).catch((error) => {
+                console.error('Error deleting lyrics: ', error);
+            });
+        }
     </script>
+</body>
 </html>

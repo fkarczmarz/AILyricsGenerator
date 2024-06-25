@@ -119,6 +119,18 @@ function sortLyrics() {
 $(document).ready(function() {
     ui.start('#firebaseui-auth-container', uiConfig);
 
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            $('#loginSection').hide();
+            $('#generateSection').show();
+            $('#userDetails').text(`Logged in as: ${user.email}`);
+            loadSavedLyrics(user.uid);
+        } else {
+            $('#loginSection').show();
+            $('#generateSection').hide();
+        }
+    });
+
     $('#generateButton').click(function() {
         var prompt = $('#prompt').val();
         var data = {
