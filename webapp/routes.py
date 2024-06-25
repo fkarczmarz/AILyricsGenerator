@@ -105,3 +105,7 @@ def download_both_pdf():
 
     buffer.seek(0)
     return send_file(buffer, as_attachment=True, download_name='lyrics_both_versions.pdf', mimetype='application/pdf')
+
+@app.route('/lyrics/<lyrics_id>')
+def lyrics_details(lyrics_id):
+    return render_template('lyrics_details.html', lyrics_id=lyrics_id)

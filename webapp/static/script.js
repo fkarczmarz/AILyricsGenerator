@@ -45,14 +45,15 @@ function loadSavedLyrics(userId) {
                 var lyricsData = doc.data();
                 var listItem = `
                     <li>${lyricsData.title} - ${new Date(lyricsData.createdAt.toDate()).toISOString()}
-                        <button onclick="markAsFavorite('${doc.id}', ${!lyricsData.favorite})">${lyricsData.favorite ? 'Unfavorite' : 'Favorite'}</button>
-                        <button onclick="rateLyrics('${doc.id}', 5)">Rate</button>
-                        <button onclick="deleteLyrics('${doc.id}')">Delete</button>
-                        <button onclick="viewLyrics('${doc.id}')">View</button>
+                        <button onclick="goToLyricsDetails('${doc.id}')">View</button>
                     </li>`;
                 savedLyricsList.append(listItem);
             });
         });
+}
+
+function goToLyricsDetails(docId) {
+    window.location.href = `/lyrics/${docId}`;
 }
 
 function saveLyrics() {
@@ -83,76 +84,35 @@ function saveLyrics() {
     }
 }
 
-function markAsFavorite(docId, favoriteStatus) {
+function sortLyrics() {
+    var sortOption = $('#sortOption').val();
     var user = firebase.auth().currentUser;
     if (!user) {
-        alert('You need to be logged in to mark as favorite.');
+        alert('You need to be logged in to sort lyrics.');
         return;
     }
 
-    db.collection('lyrics').doc(docId).update({
-        favorite: favoriteStatus
-    }).then(() => {
-        alert(`Lyrics ${favoriteStatus ? 'marked as favorite' : 'unmarked as favorite'}!`);
-        loadSavedLyrics(user.uid);
-    }).catch((error) => {
-        console.error('Error updating favorite status: ', error);
-    });
-}
+    var query = db.collection('lyrics').where('userId', '==', user.uid);
 
-function rateLyrics(docId, rating) {
-    var user = firebase.auth().currentUser;
-    if (!user) {
-        alert('You need to be logged in to rate lyrics.');
-        return;
+    if (sortOption === 'favorite') {
+        query = query.orderBy('favorite', 'desc');
+    } else if (sortOption === 'alphabetical') {
+        query = query.orderBy('title');
+    } else if (sortOption === 'date') {
+        query = query.orderBy('createdAt', 'desc');
     }
 
-    db.collection('lyrics').doc(docId).update({
-        rating: rating
-    }).then(() => {
-        alert('Lyrics rated successfully!');
-        loadSavedLyrics(user.uid);
-    }).catch((error) => {
-        console.error('Error rating lyrics: ', error);
-    });
-}
-
-function deleteLyrics(docId) {
-    var user = firebase.auth().currentUser;
-    if (!user) {
-        alert('You need to be logged in to delete lyrics.');
-        return;
-    }
-
-    db.collection('lyrics').doc(docId).delete().then(() => {
-        alert('Lyrics deleted successfully!');
-        loadSavedLyrics(user.uid);
-    }).catch((error) => {
-        console.error('Error deleting lyrics: ', error);
-    });
-}
-
-function viewLyrics(docId) {
-    var user = firebase.auth().currentUser;
-    if (!user) {
-        alert('You need to be logged in to view lyrics.');
-        return;
-    }
-
-    db.collection('lyrics').doc(docId).get().then((doc) => {
-        if (doc.exists) {
+    query.get().then((querySnapshot) => {
+        var savedLyricsList = $('#savedLyricsList');
+        savedLyricsList.empty();
+        querySnapshot.forEach((doc) => {
             var lyricsData = doc.data();
-            $('#viewLyricsSection').show();
-            $('#viewLyricsTitle').text(lyricsData.title);
-            $('#viewLyricsContent').text(lyricsData.lyrics);
-            $('#viewLyricsRating').text(`Rating: ${lyricsData.rating}`);
-            $('#viewLyricsFavorite').text(`Favorite: ${lyricsData.favorite}`);
-            $('#viewLyricsCreatedAt').text(`Created At: ${new Date(lyricsData.createdAt.toDate()).toISOString()}`);
-        } else {
-            alert('No such lyrics found!');
-        }
-    }).catch((error) => {
-        console.error('Error getting lyrics: ', error);
+            var listItem = `
+                <li>${lyricsData.title} - ${new Date(lyricsData.createdAt.toDate()).toISOString()}
+                    <button onclick="goToLyricsDetails('${doc.id}')">View</button>
+                </li>`;
+            savedLyricsList.append(listItem);
+        });
     });
 }
 
@@ -295,37 +255,3 @@ $(document).ready(function() {
         saveLyrics();
     });
 });
-function sortLyrics() {
-    var sortOption = $('#sortOption').val();
-    var user = firebase.auth().currentUser;
-    if (!user) {
-        alert('You need to be logged in to sort lyrics.');
-        return;
-    }
-
-    var query = db.collection('lyrics').where('userId', '==', user.uid);
-
-    if (sortOption === 'favorite') {
-        query = query.orderBy('favorite', 'desc');
-    } else if (sortOption === 'alphabetical') {
-        query = query.orderBy('title');
-    } else if (sortOption === 'date') {
-        query = query.orderBy('createdAt', 'desc');
-    }
-
-    query.get().then((querySnapshot) => {
-        var savedLyricsList = $('#savedLyricsList');
-        savedLyricsList.empty();
-        querySnapshot.forEach((doc) => {
-            var lyricsData = doc.data();
-            var listItem = `
-                <li>${lyricsData.title} - ${new Date(lyricsData.createdAt.toDate()).toISOString()}
-                    <button onclick="markAsFavorite('${doc.id}', ${!lyricsData.favorite})">${lyricsData.favorite ? 'Unfavorite' : 'Favorite'}</button>
-                    <button onclick="rateLyrics('${doc.id}', 5)">Rate</button>
-                    <button onclick="deleteLyrics('${doc.id}')">Delete</button>
-                    <button onclick="viewLyrics('${doc.id}')">View</button>
-                </li>`;
-            savedLyricsList.append(listItem);
-        });
-    });
-}
