@@ -1,5 +1,13 @@
 flask
-tensorflow
+tensorflow==2.9.1
 pandas
 transformers
 torch
+openai
+contractions
+pronouncing
+nltk
+note_seq
+mingus
+lyricsgenius
+reportlab
