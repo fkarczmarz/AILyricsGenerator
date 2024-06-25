@@ -50,7 +50,35 @@
                     <button id="downloadTranslatedPdfButton" style="display:none;">Download Translated Lyrics PDF</button>
                     <button id="downloadBothPdfButton" style="display:none;">Download Both Versions PDF</button>
                 </div>
+                <br>
+                <button id="saveLyricsButton">Save Lyrics</button>
             </div>
+            <div id="savedLyricsSection">
+                <h3>Saved Lyrics</h3>
+                <select id="sortOption" onchange="sortLyrics()">
+                    <option value="favorite">Sort by Favorite</option>
+                    <option value="alphabetical">Sort Alphabetically</option>
+                    <option value="date">Sort by Date</option>
+                </select>
+                <ul id="savedLyricsList"></ul>
+            </div>
+        </div>
+        <div id="viewLyricsSection" style="display:none;">
+            <h3 id="viewLyricsTitle"></h3>
+            <p id="viewLyricsContent"></p>
+            <p id="viewLyricsRating"></p>
+            <p id="viewLyricsFavorite"></p>
+            <p id="viewLyricsCreatedAt"></p>
+            <button id="generateMelodyButton">Generate Melody</button>
+            <button id="translateButton">Translate Lyrics</button>
+            <input type="text" id="targetLangView" name="targetLang" placeholder="Enter target language code (e.g., 'es' for Spanish)">
+            <div id="translatedSectionView" style="display:none;">
+                <div id="translatedLyricsView"></div>
+                <button id="downloadTranslatedPdfButtonView" style="display:none;">Download Translated Lyrics PDF</button>
+                <button id="downloadBothPdfButtonView" style="display:none;">Download Both Versions PDF</button>
+            </div>
+            <br>
+            <button onclick="saveLyrics()">Save Lyrics</button>
         </div>
     </main>
     <footer>
