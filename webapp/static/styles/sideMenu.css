@@ -10,6 +10,9 @@
   color: white;
   padding: 0 30px 15px 20px;
   overflow: auto;
+  position: sticky;
+  top: 93px;
+  z-index: 500;
 }
 
 .side-menu li {

@@ -24,6 +24,9 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 500;
 }
 
 .logo {
@@ -40,6 +43,7 @@ h1 {
 .container {
   width: 100vw;
   position: relative;
+  height: 100%;
 }
 
 main {
