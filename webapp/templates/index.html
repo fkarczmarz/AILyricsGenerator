@@ -42,10 +42,12 @@
   <div class="container">
 
     <aside id="sideMenu" class="side-menu">
-      <div class="arrow" onmouseover="openSideMenu()">◄</div>
+      <div class="arrow-open" onclick="openSideMenu()">◄</div>
 
       <div class="content">
-        <h3>Saved Lyrics</h3>
+        <h3>
+          <div class="arrow-hide" onclick="hideSideMenu()">◄</div> Saved Lyrics
+        </h3>
         <ul id="savedLyricsList"></ul>
       </div>
 

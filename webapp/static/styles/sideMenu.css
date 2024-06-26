@@ -11,11 +11,14 @@
   color: white;
   padding: 100px 30px 15px 20px;
   overflow: auto;
+  transition: 200ms;
 }
 
-.arrow {
-  background-color: red;
-  z-index: 300;
+.side-menu.open {
+  width: 200px;
+}
+
+.arrow-open {
   cursor: pointer;
   transform: rotate(180deg);
   margin-left: 15px;
@@ -23,17 +26,46 @@
   margin-top: 10px;
 }
 
-.side-menu.open {
-  width: 200px;
+.arrow-hide {
+  cursor: pointer;
+  font-size: 30px;
+  height: fit-content;
+  margin-top: -4px;
+}
+
+.side-menu.open .arrow-open {
+  display: none;
 }
 
 .side-menu .content {
+  opacity: 0;
+  font-size: 0;
+  transition: 250ms;
+}
+
+.side-menu.open a {
+  font-size: 16px;
+}
+
+.side-menu:not(.open) .arrow-hide {
   display: none;
+}
+
+.side-menu.open .content {
+  opacity: 1;
 }
 
 .side-menu h3 {
   text-align: center;
   margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.side-menu.open h3 {
+  font-size: 18px;
+  transition: 150ms;
 }
 
 .side-menu li {
