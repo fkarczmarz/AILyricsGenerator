@@ -16,3 +16,15 @@ function formatDateString(isoString) {
 
   return `${day}.${month}.${year}`;
 }
+
+function generateStarRating(rating) {
+  let stars = '';
+  for (let i = 0; i < 5; i++) {
+      if (i < rating) {
+          stars += '<i class="fa fa-star" style="font-size:20px; color: gold;"></i>';
+      } else {
+          stars += '<i class="fa fa-star-o" style="font-size:20px;"></i>';
+      }
+  }
+  return stars;
+}

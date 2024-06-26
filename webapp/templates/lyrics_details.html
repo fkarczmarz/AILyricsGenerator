@@ -56,14 +56,19 @@
                 <div class="rate-container">
                     <div id="markAsFavoriteButton" onclick="favoriteHandler()"></div>
                     <p id="lyricsRating"></p>
+                    <button onclick="rateLyricsFromDetails()">Change rate</button>
                     <p id="lyricsCreatedAt"></p>
                 </div>
             </div>
             <div id="lyricsDetailsSection">
-                <h3 id="lyricsTitle"></h3>
+                <div class="heading-wrapper">
+                    <h3 id="lyricsTitle"></h3>
+                    <a id="melodyLink"><button>Download melody</button></a>
+                    <button id="generateMelodyButton">Generate Melody</button>
+
+                </div>
                 <p id="lyricsContent"></p>
-                <a id="melodyLink"><button>Download melody</button></a>
-                <button id="generateMelodyButton">Generate Melody</button>
+
                 <button id="translateButton">Translate Lyrics</button>
                 <input type="text" id="targetLangView" name="targetLang"
                     placeholder="Enter target language code (e.g., 'es' for Spanish)">
@@ -75,7 +80,6 @@
                 </div>
                 <br>
                 <button onclick="saveLyricsFromDetails()">Save Lyrics</button>
-                <button onclick="rateLyricsFromDetails()">Rate</button>
                 <button onclick="deleteLyricsFromDetails()">Delete</button>
             </div>
         </main>

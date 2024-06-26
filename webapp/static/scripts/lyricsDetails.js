@@ -1,18 +1,7 @@
-// $(document).ready(function () {
-//   var lyricsId = "{{ lyrics_id }}";
-//   console.log(lyricsId);
-
-//   var user = firebase.auth().currentUser;
-//   if (user) {
-//     loadLyricsDetailsFromDetails(lyricsId);
-//   } else {
-//     firebase.auth().onAuthStateChanged(function (user) {
-//       if (user) {
-//         loadLyricsDetailsFromDetails(lyricsId);
-//       }
-//     });
-//   }
-// });
+var lyricsId =
+  window.location.pathname.split("/")[
+    window.location.pathname.split("/").length - 1
+  ];
 
 function loadLyricsDetailsFromDetails(lyricsId) {
   db.collection("lyrics")
@@ -24,6 +13,8 @@ function loadLyricsDetailsFromDetails(lyricsId) {
         $("#lyricsTitle").text(lyricsData.title);
         $("#lyricsContent").text(lyricsData.lyrics);
         $("#lyricsRating").text(`Rating: ${lyricsData.rating}`);
+        $("#lyricsRating").html(`${generateStarRating(lyricsData.rating)}`);
+
         $("#lyricsCreatedAt").text(
           `${formatDateString(
             new Date(lyricsData.createdAt.toDate()).toISOString()
@@ -66,9 +57,6 @@ function saveLyricsFromDetails() {
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         favorite: false,
         rating: 0,
-      })
-      .then(() => {
-        alert("Lyrics saved successfully!");
       })
       .catch((error) => {
         console.error("Error saving lyrics: ", error);
@@ -125,7 +113,6 @@ function rateLyricsFromDetails() {
       rating: rating,
     })
     .then(() => {
-      alert("Lyrics rated successfully!");
       loadLyricsDetailsFromDetails(lyricsId);
     })
     .catch((error) => {
