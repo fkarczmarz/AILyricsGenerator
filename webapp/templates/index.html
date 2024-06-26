@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Lyrics Generator Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css"
+    />
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>AI Lyrics Generator</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('generate_page') }}">Generate Lyrics and Melody</a></li>
-            </ul>
-        </nav>
+      <h1>AI Lyrics Generator</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="{{ url_for('generate_page') }}"
+              >Generate Lyrics and Melody</a
+            >
+          </li>
+        </ul>
+      </nav>
     </header>
-    <aside>
+    <div class="container">
+      <aside>
         <h3>Saved Lyrics</h3>
         <ul id="savedLyricsList"></ul>
-    </aside>
-    <main>
+      </aside>
+      <main>
         <section>
-            <h2>Welcome to the AI Lyrics Generator</h2>
-            <p>Use this tool to generate lyrics and melodies with the power of AI. Click on the menu above to start generating your own lyrics and melodies.</p>
+          <h2>Welcome to the AI Lyrics Generator</h2>
+          <p>
+            Use this tool to generate lyrics and melodies with the power of AI.
+            Click on the menu above to start generating your own lyrics and
+            melodies.
+          </p>
         </section>
-    </main>
+      </main>
+    </div>
+
     <footer>
-        <p>&copy; 2024 AI Lyrics Generator</p>
+      <p>&copy; 2024 AI Lyrics Generator</p>
     </footer>
-</body>
+  </body>
 </html>
