@@ -57,13 +57,13 @@ function renderSavedLyrics(userId) {
                           doc.id
                         }', ${!lyricsData.favorite})">${
           lyricsData.favorite
-            ? ' <i class="fa fa-star" style="font-size:30px; color: gold; cursor: pointer;"></i>'
-            : ' <i class="fa fa-star-o" style="font-size:30px; cursor: pointer;"></i>'
+            ? ' <i class="fa fa-star" style="font-size:20px; color: gold; cursor: pointer;"></i>'
+            : ' <i class="fa fa-star-o" style="font-size:20px; cursor: pointer;"></i>'
         }</div>
          
                      <i class="fa fa-trash-o" onclick="deleteLyrics('${
                        doc.id
-                     }')" style="font-size:30px; cursor: pointer;"></i></div>
+                     }')" style="font-size:20px; cursor: pointer;"></i></div>
 
 
 
@@ -184,6 +184,7 @@ $(document).ready(function () {
     if (user) {
       $("#loginSection").hide();
       $("#generateSection").show();
+      $("#sideMenu").show();
       $("#userDetails")
         .text(`${user.providerData[0].displayName.split(" ")[0]}`)
         .show();
@@ -194,6 +195,7 @@ $(document).ready(function () {
     } else {
       $("#loginSection").show();
       $("#generateSection").hide();
+      $("#sideMenu").hide();
       $("#userDetails").hide();
       $("#userPhoto").hide();
       $("#logoutButton").hide();

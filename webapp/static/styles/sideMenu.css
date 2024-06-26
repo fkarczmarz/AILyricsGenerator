@@ -2,7 +2,7 @@
   position: absolute;
   top: -30px;
   left: 0;
-  width: 250px;
+  width: 200px;
   background-color: #333;
   height: 100%;
   display: block;
@@ -13,12 +13,21 @@
 }
 
 .side-menu li {
-  padding: 15px;
+  padding: 0 15px;
   transition: 250ms;
   background-color: #333;
   border-radius: 8px;
+  width: 180px;
 }
 
 .side-menu li:hover {
   background-color: #212121;
+}
+
+.side-menu .lyrics-link {
+  max-width: 125px;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 15px 0;
 }
