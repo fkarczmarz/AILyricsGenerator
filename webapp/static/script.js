@@ -44,10 +44,10 @@ function loadSavedLyrics(userId) {
             querySnapshot.forEach((doc) => {
                 var lyricsData = doc.data();
                 var listItem = `
-                    <li>${lyricsData.title} - ${new Date(lyricsData.createdAt.toDate()).toISOString()}
-                        <button onclick="markAsFavorite('${doc.id}', ${!lyricsData.favorite})">${lyricsData.favorite ? 'Remove from Favorites' : 'Favorite'}</button>
+                    <li>
+                        <a href="javascript:goToLyricsDetails('${doc.id}')" class="lyrics-link">${lyricsData.title}</a>
+                        <button onclick="markAsFavorite('${doc.id}', ${!lyricsData.favorite})">${lyricsData.favorite ? 'Unfavorite' : 'Favorite'}</button>
                         <button onclick="deleteLyrics('${doc.id}')">Delete</button>
-                        <button onclick="goToLyricsDetails('${doc.id}')">View</button>
                     </li>`;
                 savedLyricsList.append(listItem);
             });
@@ -86,7 +86,7 @@ function renderSavedLyrics(userId) {
                 var lyricsData = doc.data();
                 var listItem = `
                     <li>
-                        <button onclick="goToLyricsDetails('${doc.id}')">${lyricsData.title}</button>
+                        <a href="javascript:goToLyricsDetails('${doc.id}')" class="lyrics-link">${lyricsData.title}</a>
                         <button onclick="markAsFavorite('${doc.id}', ${!lyricsData.favorite})">${lyricsData.favorite ? 'Unfavorite' : 'Favorite'}</button>
                         <button onclick="deleteLyrics('${doc.id}')">Delete</button>
                     </li>`;
@@ -154,13 +154,16 @@ function sortLyrics() {
         querySnapshot.forEach((doc) => {
             var lyricsData = doc.data();
             var listItem = `
-                <li>${lyricsData.title} - ${new Date(lyricsData.createdAt.toDate()).toISOString()}
-                    <button onclick="goToLyricsDetails('${doc.id}')">View</button>
+                <li>
+                    <a href="javascript:goToLyricsDetails('${doc.id}')" class="lyrics-link">${lyricsData.title}</a>
+                    <button onclick="markAsFavorite('${doc.id}', ${!lyricsData.favorite})">${lyricsData.favorite ? 'Unfavorite' : 'Favorite'}</button>
+                    <button onclick="deleteLyrics('${doc.id}')">Delete</button>
                 </li>`;
             savedLyricsList.append(listItem);
         });
     });
 }
+
 
 $(document).ready(function() {
     ui.start('#firebaseui-auth-container', uiConfig);
