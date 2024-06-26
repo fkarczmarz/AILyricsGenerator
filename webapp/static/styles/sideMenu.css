@@ -9,5 +9,16 @@
   height: calc(100vh - 163px);
   color: white;
   padding: 0 30px 15px 20px;
-  overflow: scroll;
+  overflow: auto;
+}
+
+.side-menu li {
+  padding: 15px;
+  transition: 250ms;
+  background-color: #333;
+  border-radius: 8px;
+}
+
+.side-menu li:hover {
+  background-color: #212121;
 }
