@@ -63,7 +63,6 @@
             <div id="lyricsDetailsSection">
                 <div class="heading-wrapper">
                     <h3 id="lyricsTitle"></h3>
-                    <a id="melodyLink"><button>Download melody</button></a>
                     <div>
                         <label for="language">Translate Lyrics</label>
                         <select onchange="translateFromDetails(this.value)" id="language" name="language">
@@ -73,6 +72,7 @@
                             <option value="fr">French (fr)</option>
                             <option value="es">Spanish (es)</option>
                         </select>
+                        <a id="melodyLink"><button>Download melody</button></a>
                         <button id="generateMelodyButton">Generate Melody</button>
                         <button onclick="deleteLyricsFromDetails()">Delete</button>
                     </div>
