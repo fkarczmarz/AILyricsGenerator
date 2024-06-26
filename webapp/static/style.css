@@ -129,14 +129,35 @@ footer {
 
 button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #ed7a1b;
   color: #fff;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
   transition: 250ms;
+  border-radius: 20px;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #bd6117;
+  border-radius: 50px;
+}
+#prompt {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+#prompt:focus {
+  border-color: #bd6117;
+  outline: none;
+}
+#lyricsForm {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }

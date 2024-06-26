@@ -56,9 +56,18 @@
                 <div id="loader">Loading...</div>
             </div>
             <div id="generateSection" style="display:none;">
+                <div id="instructions" style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                    <h3>How to Use the AI Lyrics Generator</h3>
+                    <ul>
+                        <li> Type a short description or theme for the lyrics you want to generate. For example: "Love and heartbreak".</li>
+                        <li> After entering your prompt, click the "Generate Lyrics" button to start the text generation process.</li>
+                    </ul>
+                    <p>
+                        The text generation uses advanced AI algorithms to create unique and creative song lyrics based on the given prompt. Feel free to experiment with different themes to get a variety of results.
+                    </p>
+                </div>
                 <form id="lyricsForm">
-                    <label for="prompt">Prompt:</label>
-                    <input type="text" id="prompt" name="prompt"><br><br>
+                    <input type="text" id="prompt" name="prompt" placeholder="Love and heartbreak">
                     <button id="generateButton">Generate Lyrics</button>
                 </form>
                 <div id="generatedLyrics"></div>
