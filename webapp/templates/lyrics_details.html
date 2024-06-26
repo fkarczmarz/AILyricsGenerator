@@ -64,23 +64,23 @@
                 <div class="heading-wrapper">
                     <h3 id="lyricsTitle"></h3>
                     <a id="melodyLink"><button>Download melody</button></a>
-                    <button id="generateMelodyButton">Generate Melody</button>
-
+                    <div>
+                        <label for="language">Translate Lyrics</label>
+                        <select onchange="translateFromDetails(this.value)" id="language" name="language">
+                            <option value="pl">Polish (pl)</option>
+                            <option value="de">German (de)</option>
+                            <option value="en">English (en)</option>
+                            <option value="fr">French (fr)</option>
+                            <option value="es">Spanish (es)</option>
+                        </select>
+                        <button id="generateMelodyButton">Generate Melody</button>
+                        <button onclick="deleteLyricsFromDetails()">Delete</button>
+                    </div>
                 </div>
-                <p id="lyricsContent"></p>
-
-                <button id="translateButton">Translate Lyrics</button>
-                <input type="text" id="targetLangView" name="targetLang"
-                    placeholder="Enter target language code (e.g., 'es' for Spanish)">
-                <div id="translatedSectionView" style="display:none;">
-                    <div id="translatedLyricsView"></div>
-                    <button id="downloadTranslatedPdfButtonView" style="display:none;">Download Translated Lyrics
-                        PDF</button>
-                    <button id="downloadBothPdfButtonView" style="display:none;">Download Both Versions PDF</button>
+                <div class="lyrics-wrapper">
+                    <p id="lyricsContent"></p>
+                    <p id="translatedLyrics"></p>
                 </div>
-                <br>
-                <button onclick="saveLyricsFromDetails()">Save Lyrics</button>
-                <button onclick="deleteLyricsFromDetails()">Delete</button>
             </div>
         </main>
     </div>

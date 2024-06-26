@@ -39,31 +39,6 @@ function loadLyricsDetailsFromDetails(lyricsId) {
     });
 }
 
-function saveLyricsFromDetails() {
-  var user = firebase.auth().currentUser;
-  if (!user) return;
-
-  var lyrics = $("#lyricsContent").text();
-  var title = $("#lyricsTitle").text();
-
-  if (title !== null) {
-    db.collection("lyrics")
-      .doc(lyricsId)
-      .update({
-        userId: user.uid,
-        title: title,
-        lyrics: lyrics,
-        translations: {},
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        favorite: false,
-        rating: 0,
-      })
-      .catch((error) => {
-        console.error("Error saving lyrics: ", error);
-      });
-  }
-}
-
 function markAsFavoriteFromDetails(docId, favoriteStatus) {
   var user = firebase.auth().currentUser;
   if (!user) return;
@@ -134,4 +109,22 @@ function deleteLyricsFromDetails() {
     .catch((error) => {
       console.error("Error deleting lyrics: ", error);
     });
+}
+
+function translateFromDetails(lang) {
+  var lyrics = $("#lyricsContent").text().replace("Generated Lyrics:\n", "");
+  var data = {
+    lyrics: lyrics,
+    target_lang: lang,
+  };
+  $.ajax({
+    url: "/translate",
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(data),
+    success: function (response) {
+      $("#translatedLyrics").text(response.translated_lyrics);
+    },
+  });
+  return false;
 }
