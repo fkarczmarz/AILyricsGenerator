@@ -234,24 +234,30 @@ $(document).ready(function () {
   });
 
   $("#generateMelodyButton").click(function () {
-    var lyrics = $("#generatedLyrics")
-      .text()
-      .replace("Generated Lyrics:\n", "");
+    var lyrics = $("#lyricsContent").text().replace("Generated Lyrics:\n", "");
+    console.log("Lyrics to send:", lyrics);  // Debugging line
+    console.log($("#lyricsContent"));
+    console.dir($("#lyricsContent"));
     var data = {
-      lyrics: lyrics,
+        lyrics: lyrics,
     };
     $.ajax({
-      url: "/generate_melody",
-      type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify(data),
-      success: function (response) {
-        $("#melodyLink").attr("href", response.melody_url);
-        $("#melodyLink").show();
-      },
+        url: "/generate_melody",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (response) {
+            $("#melodyLink").attr("href", response.melody_url);
+            $("#melodyLink").show();
+            $("#generateMelodyButton").hide();
+        },
+        error: function (xhr, status, error) {
+            console.error("Error generating melody:", error);
+        }
     });
     return false;
-  });
+});
+
 
   $("#downloadOriginalPdfButton").click(function () {
     var lyrics = $("#generatedLyrics")
@@ -368,6 +374,7 @@ $(document).ready(function () {
 
 // Wylogowywanie użytkownika Firebase po kliknięciu przycisku "Logout"
 $(document).ready(function () {
+  $("#melodyLink").hide();
   $("#logoutButton").click(function () {
     firebase
       .auth()
