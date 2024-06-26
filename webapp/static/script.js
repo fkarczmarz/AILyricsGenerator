@@ -99,6 +99,12 @@ function markAsFavorite(docId, favoriteStatus) {
     });
 }
 
+function deleteLyrics(lyricsId) {
+    firebase.firestore().collection('lyrics').doc(lyricsId).delete().then(() => {
+        renderSavedLyrics(firebase.auth().currentUser.uid);
+    });
+}
+
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     renderSavedLyrics(user.uid);
@@ -191,7 +197,6 @@ $(document).ready(function () {
       $("#userPhoto").attr("src", user.providerData[0].photoURL).show();
       $("#logoutButton").show();
       $("#loginButton").hide();
-      loadSavedLyrics(user.uid);
     } else {
       $("#loginSection").show();
       $("#generateSection").hide();
@@ -387,7 +392,6 @@ $(document).ready(function () {
         $("#userPhoto").attr("src", result.user.photoURL).show();
         $("#logoutButton").show();
         $("#loginButton").hide();
-        loadSavedLyrics(result.user.uid);
       })
       .catch((error) => {
         // Wystapil blad podczas logowania
