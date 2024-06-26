@@ -60,15 +60,49 @@ main {
 }
 
 .userDetails {
-display: flex;
-gap: 10px;
-align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
 }
 
 .userDetails img {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+}
+
+.userDetails p,
+.userDetails img {
+  transition: 350ms;
+  opacity: 1;
+}
+
+.logout {
+  opacity: 0;
+  transition: 350ms;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userDetails:hover .logout {
+  opacity: 1;
+}
+
+.userDetails:hover p,
+.userDetails:hover img {
+  opacity: 0;
 }
 aside {
   position: absolute;

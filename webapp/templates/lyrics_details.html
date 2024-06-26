@@ -18,9 +18,16 @@
         <h1>Lyrics Details</h1>
         <nav>
             <ul>
-                <li><a href="{{ url_for('generate_page') }}">Back to Generate</a></li>
+                <li></li>
             </ul>
         </nav>
+        <div class="userDetails">
+            <p id="userDetails"></p>
+            <img id="userPhoto" alt="User photo">
+            <div class="logout">
+                Logout
+            </div>
+        </div>
     </header>
     <div class="container">
     <aside>
@@ -28,6 +35,7 @@
         <ul id="savedLyricsList"></ul>
     </aside>
     <main>
+        <a href="{{ url_for('generate_page') }}">◄ Back to Generate</a>
         <div id="lyricsDetailsSection">
             <h3 id="lyricsTitle"></h3>
             <p id="lyricsContent"></p>
