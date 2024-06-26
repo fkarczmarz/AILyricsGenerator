@@ -234,13 +234,19 @@ $(document).ready(function () {
   });
 
   $("#generateMelodyButton").click(function () {
-    var lyrics = $("#lyricsContent").text().replace("Generated Lyrics:\n", "");
-    console.log("Lyrics to send:", lyrics);  // Debugging line
-    console.log($("#lyricsContent"));
-    console.dir($("#lyricsContent"));
+    var lyricsContentText = $("#lyricsContent").text().replace("Generated Lyrics:\n", "");
+    var generatedLyricsText = $("#generatedLyrics").text().replace("Generated Lyrics:\n", "");
+
+    var lyrics = lyricsContentText || generatedLyricsText;
+
+    console.log("Raw Lyrics Content:", lyricsContentText);  // Debugging line
+    console.log("Generated Lyrics Content:", generatedLyricsText);  // Debugging line
+    console.log("Processed Lyrics to send:", lyrics);  // Debugging line
+
     var data = {
         lyrics: lyrics,
     };
+
     $.ajax({
         url: "/generate_melody",
         type: "POST",
