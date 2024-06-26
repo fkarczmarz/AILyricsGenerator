@@ -11,6 +11,15 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
 header {
   background-color: #333;
   color: #fff;
@@ -29,21 +38,6 @@ h1 {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-}
-
-nav ul li {
-  display: inline;
-  margin: 0 10px;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
 }
 
 .container {
@@ -98,6 +92,11 @@ main {
 .login:hover {
   color: aqua;
   opacity: 1;
+}
+
+.userDetails:hover p,
+.userDetails:hover img {
+  opacity: 0;
 }
 aside {
   position: absolute;
