@@ -77,6 +77,32 @@ function markAsFavorite(docId, favoriteStatus) {
     });
 }
 
+function renderSavedLyrics(userId) {
+    firebase.firestore().collection('lyrics').where('userId', '==', userId)
+        .get()
+        .then((querySnapshot) => {
+            var savedLyricsList = $('#savedLyricsList');
+            savedLyricsList.empty();
+            querySnapshot.forEach((doc) => {
+                var lyricsData = doc.data();
+                var listItem = `
+                    <li>
+                        <button onclick="goToLyricsDetails('${doc.id}')">${lyricsData.title}</button>
+                        <button onclick="markAsFavorite('${doc.id}', ${!lyricsData.favorite})">${lyricsData.favorite ? 'Unfavorite' : 'Favorite'}</button>
+                        <button onclick="deleteLyrics('${doc.id}')">Delete</button>
+                    </li>`;
+                savedLyricsList.append(listItem);
+            });
+        });
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        renderSavedLyrics(user.uid);
+    }
+});
+
+
 function saveLyrics() {
     var user = firebase.auth().currentUser;
     if (!user) {
