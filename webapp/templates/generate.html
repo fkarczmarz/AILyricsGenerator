@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,54 +14,64 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
+
 <body>
     <header>
-        <h1>AI Lyrics Generator</h1>
+        <h1>
+            <img class="logo" src="static/fav.ico" alt="">
+            <a href="/">
+                AI Lyrics Generator
+            </a>
+        </h1>
         <nav>
             <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li>
+                </li>
             </ul>
         </nav>
     </header>
     <div class="container">
-    <aside>
-        <h3>Saved Lyrics</h3>
-        <ul id="savedLyricsList"></ul>
-    </aside>
-    <main>
-        <div id="loginSection">
-            <h2>Login</h2>
-            <div id="firebaseui-auth-container"></div>
-            <div id="loader">Loading...</div>
-        </div>
-        <div id="generateSection" style="display:none;">
-            <p id="userDetails"></p>
-            <form id="lyricsForm">
-                <label for="prompt">Prompt:</label>
-                <input type="text" id="prompt" name="prompt"><br><br>
-                <button id="generateButton">Generate Lyrics</button>
-            </form>
-            <div id="generatedLyrics"></div>
-            <div id="melodySection" style="display:none;">
-                <button id="generateMelodyButton">Generate Melody</button>
-                <a id="melodyLink" href="#" style="display:none;" download="melody.mid">Download Melody</a>
-                <br>
-                <button id="downloadOriginalPdfButton">Download Original Lyrics PDF</button>
-                <button id="translateButton">Translate Lyrics</button>
-                <input type="text" id="targetLang" name="targetLang" placeholder="Enter target language code (e.g., 'es' for Spanish)">
-                <div id="translatedSection" style="display:none;">
-                    <div id="translatedLyrics"></div>
-                    <button id="downloadTranslatedPdfButton" style="display:none;">Download Translated Lyrics PDF</button>
-                    <button id="downloadBothPdfButton" style="display:none;">Download Both Versions PDF</button>
-                </div>
-                <br>
-                <button id="saveLyricsButton">Save Lyrics</button>
+        <aside>
+            <h3>Saved Lyrics</h3>
+            <ul id="savedLyricsList"></ul>
+        </aside>
+        <main>
+            <div id="loginSection">
+                <h2>Login</h2>
+                <div id="firebaseui-auth-container"></div>
+                <div id="loader">Loading...</div>
             </div>
-        </div>
-    </main>
-</div>
+            <div id="generateSection" style="display:none;">
+                <p id="userDetails"></p>
+                <form id="lyricsForm">
+                    <label for="prompt">Prompt:</label>
+                    <input type="text" id="prompt" name="prompt"><br><br>
+                    <button id="generateButton">Generate Lyrics</button>
+                </form>
+                <div id="generatedLyrics"></div>
+                <div id="melodySection" style="display:none;">
+                    <button id="generateMelodyButton">Generate Melody</button>
+                    <a id="melodyLink" href="#" style="display:none;" download="melody.mid">Download Melody</a>
+                    <br>
+                    <button id="downloadOriginalPdfButton">Download Original Lyrics PDF</button>
+                    <button id="translateButton">Translate Lyrics</button>
+                    <input type="text" id="targetLang" name="targetLang"
+                        placeholder="Enter target language code (e.g., 'es' for Spanish)">
+                    <div id="translatedSection" style="display:none;">
+                        <div id="translatedLyrics"></div>
+                        <button id="downloadTranslatedPdfButton" style="display:none;">Download Translated Lyrics
+                            PDF</button>
+                        <button id="downloadBothPdfButton" style="display:none;">Download Both Versions PDF</button>
+                    </div>
+                    <br>
+                    <button id="saveLyricsButton">Save Lyrics</button>
+                </div>
+            </div>
+        </main>
+    </div>
     <footer>
         <p>&copy; 2024 AI Lyrics Generator</p>
     </footer>
 </body>
+
 </html>
