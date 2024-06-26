@@ -46,6 +46,9 @@ function renderSavedLyrics(userId) {
       savedLyricsList.empty();
       querySnapshot.forEach((doc) => {
         var lyricsData = doc.data();
+        console.dir("blebelbelbelbleble", doc);
+        console.log("blebelbelbelbleble", lyricsData);
+
         var listItem = `
                     <li style="display: flex; align-items: center; justify-content: space-between;">
 
@@ -100,8 +103,13 @@ function markAsFavorite(docId, favoriteStatus) {
 }
 
 function deleteLyrics(lyricsId) {
-    firebase.firestore().collection('lyrics').doc(lyricsId).delete().then(() => {
-        renderSavedLyrics(firebase.auth().currentUser.uid);
+  firebase
+    .firestore()
+    .collection("lyrics")
+    .doc(lyricsId)
+    .delete()
+    .then(() => {
+      renderSavedLyrics(firebase.auth().currentUser.uid);
     });
 }
 

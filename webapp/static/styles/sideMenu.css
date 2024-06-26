@@ -1,18 +1,39 @@
 .side-menu {
-  position: absolute;
-  top: -30px;
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 200px;
+  width: 0;
   background-color: #333;
   height: 100%;
   display: block;
-  height: calc(100vh - 163px);
+  /* height: calc(100vh - 163px); */
+  height: 100vh;
   color: white;
-  padding: 0 30px 15px 20px;
+  padding: 100px 30px 15px 20px;
   overflow: auto;
-  position: sticky;
-  top: 93px;
-  z-index: 500;
+}
+
+.arrow {
+  background-color: red;
+  z-index: 300;
+  cursor: pointer;
+  transform: rotate(180deg);
+  margin-left: 15px;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.side-menu.open {
+  width: 200px;
+}
+
+.side-menu .content {
+  display: none;
+}
+
+.side-menu h3 {
+  text-align: center;
+  margin-top: 0;
 }
 
 .side-menu li {

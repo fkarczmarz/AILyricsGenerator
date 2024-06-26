@@ -17,6 +17,7 @@
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='utils.js') }}"></script>
 </head>
 
 <body>
@@ -41,8 +42,13 @@
   <div class="container">
 
     <aside id="sideMenu" class="side-menu">
-      <h3>Saved Lyrics</h3>
-      <ul id="savedLyricsList"></ul>
+      <div class="arrow" onmouseover="openSideMenu()">◄</div>
+
+      <div class="content">
+        <h3>Saved Lyrics</h3>
+        <ul id="savedLyricsList"></ul>
+      </div>
+
     </aside>
 
     <main>
