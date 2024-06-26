@@ -46,7 +46,6 @@ function loadSavedLyrics(userId) {
                 var listItem = `
                     <li>${lyricsData.title} - ${new Date(lyricsData.createdAt.toDate()).toISOString()}
                         <button onclick="markAsFavorite('${doc.id}', ${!lyricsData.favorite})">${lyricsData.favorite ? 'Remove from Favorites' : 'Favorite'}</button>
-                        <button onclick="rateLyrics('${doc.id}', 5)">Rate</button>
                         <button onclick="deleteLyrics('${doc.id}')">Delete</button>
                         <button onclick="goToLyricsDetails('${doc.id}')">View</button>
                     </li>`;
