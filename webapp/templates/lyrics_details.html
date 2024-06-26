@@ -51,19 +51,18 @@
             </div>
         </aside>
         <main class="main">
-            <div>
+            <div class="actions-container">
                 <a class="back" href="{{ url_for('generate_page') }}">◄ Back to Generate</a>
-                <div style="display: flex; gap: 7px;">
-                    <div id="markAsFavoriteButton" onclick="favoriteHandler()">
-                    </div>
+                <div class="rate-container">
+                    <div id="markAsFavoriteButton" onclick="favoriteHandler()"></div>
+                    <p id="lyricsRating"></p>
+                    <p id="lyricsCreatedAt"></p>
                 </div>
             </div>
             <div id="lyricsDetailsSection">
                 <h3 id="lyricsTitle"></h3>
                 <p id="lyricsContent"></p>
-                <p id="lyricsRating"></p>
-                <p id="lyricsFavorite"></p>
-                <p id="lyricsCreatedAt"></p>
+                <a id="melodyLink"><button>Download melody</button></a>
                 <button id="generateMelodyButton">Generate Melody</button>
                 <button id="translateButton">Translate Lyrics</button>
                 <input type="text" id="targetLangView" name="targetLang"
