@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Lyrics Generator</title>
     <link rel="icon" type="image/x-icon" href="/static/fav.ico">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/sideMenu.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/sideMenu.css') }}" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
@@ -17,6 +17,7 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='utils.js') }}"></script>
 </head>
 
 <body>
@@ -40,9 +41,14 @@
     </header>
     <div class="container">
         <aside id="sideMenu" class="side-menu">
-            <h3>Saved Lyrics</h3>
-            <ul id="savedLyricsList"></ul>
-          </aside>
+            <div class="arrow-open" onclick="openSideMenu()">◄</div>
+            <div class="content">
+                <h3>
+                    <div class="arrow-hide" onclick="hideSideMenu()">◄</div> Saved Lyrics
+                </h3>
+                <ul id="savedLyricsList"></ul>
+            </div>
+        </aside>
         <main>
             <div id="loginSection">
                 <h2>Login</h2>
