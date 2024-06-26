@@ -45,6 +45,9 @@ function loadSavedLyrics(userId) {
                 var lyricsData = doc.data();
                 var listItem = `
                     <li>${lyricsData.title} - ${new Date(lyricsData.createdAt.toDate()).toISOString()}
+                        <button onclick="markAsFavorite('${doc.id}', ${!lyricsData.favorite})">${lyricsData.favorite ? 'Remove from Favorites' : 'Favorite'}</button>
+                        <button onclick="rateLyrics('${doc.id}', 5)">Rate</button>
+                        <button onclick="deleteLyrics('${doc.id}')">Delete</button>
                         <button onclick="goToLyricsDetails('${doc.id}')">View</button>
                     </li>`;
                 savedLyricsList.append(listItem);
@@ -52,8 +55,26 @@ function loadSavedLyrics(userId) {
         });
 }
 
+
 function goToLyricsDetails(docId) {
     window.location.href = `/lyrics/${docId}`;
+}
+
+function markAsFavorite(docId, favoriteStatus) {
+    var user = firebase.auth().currentUser;
+    if (!user) {
+        alert('You need to be logged in to mark as favorite.');
+        return;
+    }
+
+    db.collection('lyrics').doc(docId).update({
+        favorite: favoriteStatus
+    }).then(() => {
+        alert(`Lyrics ${favoriteStatus ? 'marked as favorite' : 'removed from favorites'}!`);
+        loadSavedLyrics(user.uid);
+    }).catch((error) => {
+        console.error('Error updating favorite status: ', error);
+    });
 }
 
 function saveLyrics() {

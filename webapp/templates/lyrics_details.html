@@ -39,7 +39,7 @@
             </div>
             <br>
             <button onclick="saveLyrics()">Save Lyrics</button>
-            <button onclick="markAsFavorite()">Favorite</button>
+            <button id="markAsFavoriteButton">Favorite</button>
             <button onclick="rateLyrics()">Rate</button>
             <button onclick="deleteLyrics()">Delete</button>
         </div>
@@ -63,21 +63,28 @@
         });
 
         function loadLyricsDetails(lyricsId) {
-            db.collection('lyrics').doc(lyricsId).get().then((doc) => {
-                if (doc.exists) {
-                    var lyricsData = doc.data();
-                    $('#lyricsTitle').text(lyricsData.title);
-                    $('#lyricsContent').text(lyricsData.lyrics);
-                    $('#lyricsRating').text(`Rating: ${lyricsData.rating}`);
-                    $('#lyricsFavorite').text(`Favorite: ${lyricsData.favorite}`);
-                    $('#lyricsCreatedAt').text(`Created At: ${new Date(lyricsData.createdAt.toDate()).toISOString()}`);
-                } else {
-                    alert('No such lyrics found!');
-                }
-            }).catch((error) => {
-                console.error('Error getting lyrics: ', error);
+    db.collection('lyrics').doc(lyricsId).get().then((doc) => {
+        if (doc.exists) {
+            var lyricsData = doc.data();
+            $('#lyricsTitle').text(lyricsData.title);
+            $('#lyricsContent').text(lyricsData.lyrics);
+            $('#lyricsRating').text(`Rating: ${lyricsData.rating}`);
+            $('#lyricsFavorite').text(`Favorite: ${lyricsData.favorite}`);
+            $('#lyricsCreatedAt').text(`Created At: ${new Date(lyricsData.createdAt.toDate()).toISOString()}`);
+
+            var favoriteButton = $('#markAsFavoriteButton');
+            favoriteButton.text(lyricsData.favorite ? 'Remove from Favorites' : 'Favorite');
+            favoriteButton.off('click').on('click', function() {
+                markAsFavorite(lyricsId, !lyricsData.favorite);
             });
+        } else {
+            alert('No such lyrics found!');
         }
+    }).catch((error) => {
+        console.error('Error getting lyrics: ', error);
+    });
+}
+
 
         function saveLyrics() {
             var user = firebase.auth().currentUser;
@@ -106,25 +113,23 @@
             }
         }
 
-        function markAsFavorite() {
-            var user = firebase.auth().currentUser;
-            if (!user) {
-                alert('You need to be logged in to mark as favorite.');
-                return;
-            }
+        function markAsFavorite(docId, favoriteStatus) {
+    var user = firebase.auth().currentUser;
+    if (!user) {
+        alert('You need to be logged in to mark as favorite.');
+        return;
+    }
 
-            db.collection('lyrics').doc(lyricsId).get().then((doc) => {
-                var lyricsData = doc.data();
-                db.collection('lyrics').doc(lyricsId).update({
-                    favorite: !lyricsData.favorite
-                }).then(() => {
-                    alert(`Lyrics ${!lyricsData.favorite ? 'marked as favorite' : 'unmarked as favorite'}!`);
-                    loadLyricsDetails(lyricsId);
-                }).catch((error) => {
-                    console.error('Error updating favorite status: ', error);
-                });
-            });
-        }
+    db.collection('lyrics').doc(docId).update({
+        favorite: favoriteStatus
+    }).then(() => {
+        alert(`Lyrics ${favoriteStatus ? 'marked as favorite' : 'removed from favorites'}!`);
+        loadLyricsDetails(docId); // Odśwież szczegóły piosenki
+    }).catch((error) => {
+        console.error('Error updating favorite status: ', error);
+    });
+}
+
 
         function rateLyrics() {
             var user = firebase.auth().currentUser;
