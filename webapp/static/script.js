@@ -46,9 +46,6 @@ function renderSavedLyrics(userId) {
       savedLyricsList.empty();
       querySnapshot.forEach((doc) => {
         var lyricsData = doc.data();
-        console.dir("blebelbelbelbleble", doc);
-        console.log("blebelbelbelbleble", lyricsData);
-
         var listItem = `
                     <li style="display: flex; align-items: center; justify-content: space-between;">
 
@@ -60,8 +57,8 @@ function renderSavedLyrics(userId) {
                           doc.id
                         }', ${!lyricsData.favorite})">${
           lyricsData.favorite
-            ? ' <i class="fa fa-star" style="font-size:20px; color: gold; cursor: pointer;"></i>'
-            : ' <i class="fa fa-star-o" style="font-size:20px; cursor: pointer;"></i>'
+            ? ' <i class="fa fa-heart" style="font-size:20px; color: crimson; cursor: pointer;"></i>'
+            : ' <i class="fa fa-heart-o" style="font-size:20px; cursor: pointer;"></i>'
         }</div>
          
                      <i class="fa fa-trash-o" onclick="deleteLyrics('${
