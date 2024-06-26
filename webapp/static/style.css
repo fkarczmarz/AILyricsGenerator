@@ -78,31 +78,26 @@ main {
   opacity: 1;
 }
 
-.logout {
+.userDetails:has(.logout:hover) p,
+.userDetails:has(.logout:hover) img {
+  opacity: 0;
+}
+
+.logout,
+.login {
   opacity: 0;
   transition: 350ms;
   cursor: pointer;
   position: absolute;
-  top: 50%;  
-  left: 50%; 
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #444;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.userDetails:hover .logout {
+.logout:hover,
+.login:hover {
+  color: aqua;
   opacity: 1;
-}
-
-.userDetails:hover p,
-.userDetails:hover img {
-  opacity: 0;
 }
 aside {
   position: absolute;
