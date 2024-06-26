@@ -59,6 +59,17 @@ main {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.userDetails {
+display: flex;
+gap: 10px;
+align-items: center;
+}
+
+.userDetails img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
 aside {
   position: absolute;
   top: 20px;

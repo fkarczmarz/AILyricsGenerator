@@ -169,10 +169,12 @@ $(document).ready(function() {
     ui.start('#firebaseui-auth-container', uiConfig);
 
     firebase.auth().onAuthStateChanged(function(user) {
+        console.log(user); // Dodane logowanie użytkownika
         if (user) {
             $('#loginSection').hide();
             $('#generateSection').show();
-            $('#userDetails').text(`Logged in as: ${user.email}`);
+            $('#userDetails').text(`${user.providerData[0].displayName.split(" ")[0]}`);
+            $('#userPhoto').attr('src', user.providerData[0].photoURL); // Prawidłowe ustawienie src
             loadSavedLyrics(user.uid);
         } else {
             $('#loginSection').show();
