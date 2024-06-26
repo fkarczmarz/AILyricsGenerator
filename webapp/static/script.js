@@ -224,11 +224,10 @@ $(document).ready(function () {
       contentType: "application/json",
       data: JSON.stringify(data),
       success: function (response) {
-        $("#generatedLyrics").text(
-          "Generated Lyrics:\n" + response.generated_lyrics
-        );
+        var formattedLyrics = response.generated_lyrics.replace(/\n/g, '<br>');
+        $("#generatedLyrics").html("Generated Lyrics:<br>" + formattedLyrics);
         $("#melodySection").show();
-      },
+    },
     });
     return false;
   });

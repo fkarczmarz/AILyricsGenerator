@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/sideMenu.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/generate.css') }}" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
@@ -74,7 +75,6 @@
                     <input type="text" id="prompt" name="prompt" placeholder="Love and heartbreak">
                     <button id="generateButton">Generate Lyrics</button>
                 </form>
-                <div id="generatedLyrics"></div>
                 <div id="melodySection" style="display:none;">
                     <button id="generateMelodyButton">Generate Melody</button>
                     <a id="melodyLink"><button>Download melody</button></a>
@@ -91,6 +91,7 @@
                     </div>
                     <button id="saveLyricsButton">Save Lyrics</button>
                 </div>
+                <div id="generatedLyrics"></div>
             </div>
         </main>
     </div>
