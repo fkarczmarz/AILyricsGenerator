@@ -48,13 +48,19 @@ select {
 
 .rate-container {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   align-items: center;
 }
 
 .heading-wrapper {
   display: flex;
   justify-content: space-between;
+}
+
+.actions-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .lyrics-wrapper {
