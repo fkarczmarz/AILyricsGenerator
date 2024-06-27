@@ -305,9 +305,8 @@ $(document).ready(function () {
       contentType: "application/json",
       data: JSON.stringify(data),
       success: function (response) {
-        $("#translatedLyrics").text(
-          "Translated Lyrics:\n" + response.translated_lyrics
-        );
+        var formattedTranslatedLyrics = response.translated_lyrics.replace(/\n/g, '<br>');
+        $("#translatedLyrics").html("Translated Lyrics:<br>" + formattedTranslatedLyrics);
         $("#translatedSection").show();
         $("#downloadTranslatedPdfButton").show();
         $("#downloadBothPdfButton").show();
