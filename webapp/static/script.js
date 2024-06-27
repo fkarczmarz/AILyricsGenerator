@@ -224,45 +224,51 @@ $(document).ready(function () {
       contentType: "application/json",
       data: JSON.stringify(data),
       success: function (response) {
-        var formattedLyrics = response.generated_lyrics.replace(/\n/g, '<br>');
+        var formattedLyrics = response?.generated_lyrics?.replace(
+          /\n/g,
+          "<br>"
+        );
         $("#generatedLyrics").html("Generated Lyrics:<br>" + formattedLyrics);
         $("#melodySection").show();
-    },
+      },
     });
     return false;
   });
 
   $("#generateMelodyButton").click(function () {
-    var lyricsContentText = $("#lyricsContent").text().replace("Generated Lyrics:\n", "");
-    var generatedLyricsText = $("#generatedLyrics").text().replace("Generated Lyrics:\n", "");
+    var lyricsContentText = $("#lyricsContent")
+      .text()
+      .replace("Generated Lyrics:\n", "");
+    var generatedLyricsText = $("#generatedLyrics")
+      .text()
+      .replace("Generated Lyrics:\n", "");
 
     var lyrics = lyricsContentText || generatedLyricsText;
 
-    console.log("Raw Lyrics Content:", lyricsContentText);  // Debugging line
-    console.log("Generated Lyrics Content:", generatedLyricsText);  // Debugging line
-    console.log("Processed Lyrics to send:", lyrics);  // Debugging line
+    console.log("Raw Lyrics Content:", lyricsContentText); // Debugging line
+    console.log("Generated Lyrics Content:", generatedLyricsText); // Debugging line
+    console.log("Processed Lyrics to send:", lyrics); // Debugging line
 
     var data = {
-        lyrics: lyrics,
+      lyrics: lyrics,
     };
 
     $.ajax({
-        url: "/generate_melody",
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(data),
-        success: function (response) {
-            $("#melodyLink").attr("href", response.melody_url);
-            $("#melodyLink").show();
-            $("#generateMelodyButton").hide();
-        },
-        error: function (xhr, status, error) {
-            console.error("Error generating melody:", error);
-        }
+      url: "/generate_melody",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(data),
+      success: function (response) {
+        $("#melodyLink").attr("href", response.melody_url);
+        $("#melodyLink").show();
+        $("#generateMelodyButton").hide();
+      },
+      error: function (xhr, status, error) {
+        console.error("Error generating melody:", error);
+      },
     });
     return false;
-});
-
+  });
 
   $("#downloadOriginalPdfButton").click(function () {
     var lyrics = $("#generatedLyrics")
@@ -305,8 +311,13 @@ $(document).ready(function () {
       contentType: "application/json",
       data: JSON.stringify(data),
       success: function (response) {
-        var formattedTranslatedLyrics = response.translated_lyrics.replace(/\n/g, '<br>');
-        $("#translatedLyrics").html("Translated Lyrics:<br>" + formattedTranslatedLyrics);
+        var formattedTranslatedLyrics = response.translated_lyrics.replace(
+          /\n/g,
+          "<br>"
+        );
+        $("#translatedLyrics").html(
+          "Translated Lyrics:<br>" + formattedTranslatedLyrics
+        );
         $("#translatedSection").show();
         $("#downloadTranslatedPdfButton").show();
         $("#downloadBothPdfButton").show();
@@ -415,3 +426,4 @@ $(document).ready(function () {
       });
   });
 });
+
